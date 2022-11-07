@@ -45,6 +45,7 @@ class BookInstance(models.Model):
     )
 
     status = models.CharField('status', max_length=1, choices=LOAN_STATUS, default='m')
+    # price = models.DecimalField('price', max_digits=15, decimal_places=2)
 
     def __str__(self) -> str:
         return f"{self.unique_id} : {self.book.title}"

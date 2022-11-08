@@ -18,6 +18,8 @@ class Author(models.Model):
 
     class Meta:
         ordering = ['last_name', 'first_name']
+        verbose_name = 'author'
+        verbose_name_plural ='authors'
 
 
 class Book(models.Model):
@@ -30,6 +32,9 @@ class Book(models.Model):
 
     def __str__(self) -> str:
         return f"{self.author} - {self.title}"
+
+    def display_genre(self) -> str:
+        return ', '.join(genre.name for genre in self.genre.all()[:3])
 
 
 class BookInstance(models.Model):

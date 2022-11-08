@@ -22,6 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = local_settings.SECRET_KEY
+# from django.core.management.utils import get_random_secret_key  - rasome terminale, kad pakeistume secret key i nauja
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

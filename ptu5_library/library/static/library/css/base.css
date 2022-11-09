@@ -1,0 +1,54 @@
+body {
+    background-color: rgb(245, 175, 118);
+    margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 100vh;
+}
+
+header, main, footer {
+    min-width: fit-content;
+}
+
+header {
+    background-color: rgb(91, 96, 99);
+}
+
+header a {
+    display: inline-block;
+    color: white;
+    padding: 0.5rem;
+    text-decoration: none;
+}
+
+header a:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+main {
+    flex-grow: 1;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.5);
+    max-width: 1200px;
+    min-width: 480px;
+    margin: 0, auto;
+}
+
+h1, h2, h3, p {
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+}
+
+h1, h2, h3 {
+    background-color: #fff;
+    border-bottom: 3px solid #236;
+}
+
+footer {
+    display: flex;
+    align-content: stretch;
+}

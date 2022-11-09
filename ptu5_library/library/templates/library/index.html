@@ -1,0 +1,12 @@
+{% extends 'library/base.html' %}
+{% block title %}Welocome to {{block.super}}{% endblock title %}
+{% block content %}
+<h1>PTU5 Library</h1>
+    <ul>
+        <li>Total books: {{ book_count }}</li>
+        <li>Total book copies: {{ book_intance_count }}</li>
+        <li>Availible: book copies {{ book_instance_availible_count }}</li>
+        <li>Distinct authors: {{ author_count }}</li>
+        <li>Genre: {{ genre_count }}</li>
+    </ul>
+{% endblock content %}

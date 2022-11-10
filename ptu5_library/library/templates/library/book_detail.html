@@ -2,17 +2,18 @@
 {% block title %}{{ ogject }}{% endblock %}
 {% block content %}
     <h1>{{ object.title }}</h1>
-    <h3>by {{ object.author }}</h3>
-        <p>
-            {% if object.isbn %}
-                <p>ISBN: {{ object.isbn }}</p>
-            {% endif %}
-            {% if object.genre %}
-                <p>Genre: {{ object.genre.all|join:", "}}</p>
-            {% endif %}
-        </p>
-
+    <h3>by {{ object.author.link }}</h3>
+        {% if object.isbn %}
+            <p>ISBN: {{ object.isbn }}</p>
+        {% endif %}
+        {% if object.genre %}
+            {% comment %} <p>Genre: {{ object.genre.all|join:", "}}</p> {% endcomment %}
+            <p>Genre:{% for genre in object.genre.all %}
+                {{ genre.link_filtered_books }}
+                {% endfor %}
+            </p>
+        {% endif %}
     <div class="summary">
-        {{ object.summary }}
+        {{ object.summery }}
     </div>
 {% endblock content %}

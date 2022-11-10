@@ -1,5 +1,7 @@
 from django.db import models
 import uuid
+from django.utils.html import format_html
+from django.urls import reverse
 
 # Create your models here.
 class Genre(models.Model):
@@ -7,6 +9,10 @@ class Genre(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+    def link_filtered_books(self):
+        link = reverse('books')+'?genre_id='+str(self.id)
+        return format_html('<a class="genre" href="{link}">{name}</a>', link=link, name=self.name)
 
 
 class Author(models.Model):
@@ -20,6 +26,10 @@ class Author(models.Model):
     def display_books(self) -> str:
         return ', '.join(book.title for book in self.books.all())
     display_books.short_description = 'books'
+
+    def link(self) -> str:
+        link = reverse('author', kwargs={'author_id':self.id})
+        return format_html('<a href="{link}">{author}</a>', link=link, author=self.__str__())
 
     class Meta:
         ordering = ['last_name', 'first_name']
@@ -43,6 +53,11 @@ class Book(models.Model):
     def display_genre(self) -> str:
         return ', '.join(genre.name for genre in self.genre.all()[:3])
     display_genre.short_description = 'genre(s)'
+
+    # @property
+    # def author_link(self) -> str:
+    #     link = reverse('author', kwargs={'author_id': self.author.id})
+    #     return format_html('<a href="{link}">{author}</a>', link=link, author=self.author)
 
 
 class BookInstance(models.Model):

@@ -1,10 +1,20 @@
 {% extends 'library/base.html' %}
 {% block title %}Book in {{ block.super }}{% endblock title %}
 {% block content %}
-    <h1>Book {{ book_count }} pcs</h1>
+    <h1>Book {{ book_count }} pcs
+        {% if genre %}{{ genre }}{% endif %}
+    </h1>
+    <div class="genre_filter">
+        <h3>Availible Genres</h3>
+        <ul>
+            {% for filter_genre in genres %}
+                <li class="{% if filter_genre == genre %}current{% endif %}">{{ filter_genre.link_filtered_books }}</li>
+            {% endfor %}
+        </ul>
+    </div>
     <ul>
         {% for book in book_list %}
-            <li><a href="{% url 'book' book.pk %}">{{ book.title }}</a> - {{ book.author }}</li>   
+            <li><a href="{% url 'book' book.pk %}">{{ book.title }}</a> - {{ book.author.link }}</li>   
         {% endfor %}
     </ul>
 

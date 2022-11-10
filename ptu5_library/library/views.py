@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView, DeleteView
 from django.http import HttpResponse
 from . models import Genre, Author, Book, BookInstance
 
@@ -26,4 +27,11 @@ def index(request):
 def authors(request):
     return render(request, 'library/authors.html', {'authors': Author.objects.all()})
 
-    
+def author(request, author_id):
+    return render(request, 'library/author.html', {'author': get_object_or_404(Author,id=author_id)})
+
+
+class BookListView(ListView):
+    model = Book
+    template_name = 'library/book_list.html'
+

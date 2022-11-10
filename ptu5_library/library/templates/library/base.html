@@ -10,10 +10,12 @@
 </head>
 <body>
     <header>
+        {% comment %} Meniukas {% endcomment %}
         <div class "container">
             {% block nav %}
                 <a href="{% url 'index' %}">Home</a>
                 <a href="{% url 'authors' %}">Authors</a>
+                <a href="{% url 'books' %}">Book</a>
                 <a href="{% url 'admin:index' %}">Admin</a>
 
                 {% endblock nav %}

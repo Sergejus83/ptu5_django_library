@@ -1,0 +1,18 @@
+{% extends 'library/base.html' %}
+{% block title %}{{ ogject }}{% endblock %}
+{% block content %}
+    <h1>{{ object.title }}</h1>
+    <h3>by {{ object.author }}</h3>
+        <p>
+            {% if object.isbn %}
+                <p>ISBN: {{ object.isbn }}</p>
+            {% endif %}
+            {% if object.genre %}
+                <p>Genre: {{ object.genre.all|join:", "}}</p>
+            {% endif %}
+        </p>
+
+    <div class="summary">
+        {{ object.summary }}
+    </div>
+{% endblock content %}

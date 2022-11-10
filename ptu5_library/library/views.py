@@ -35,3 +35,13 @@ class BookListView(ListView):
     model = Book
     template_name = 'library/book_list.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # context['book_count'] = Book.objects.count()
+        context['book_count'] = self.get_queryset().count()
+        return context
+
+
+class BookDetailView(DeleteView):
+    model = Book
+    template_name = 'library/book_detail.html'

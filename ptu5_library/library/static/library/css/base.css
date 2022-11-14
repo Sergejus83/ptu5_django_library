@@ -1,6 +1,6 @@
 body {
     background-color: rgb(245, 175, 118);
-    margin: 0;
+    margin: 1rem;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: flex;
     flex-direction: column;
@@ -14,12 +14,13 @@ header, main, footer {
 
 header {
     background-color: rgb(91, 96, 99);
+    margin: 1rem, auto;
 }
 
 header a {
     display: inline-block;
     color: white;
-    padding: 0.5rem;
+    padding: 1rem;
     text-decoration: none;
 }
 
@@ -35,12 +36,12 @@ main {
     background-color: rgba(255, 255, 255, 0.5);
     max-width: 1200px;
     min-width: 480px;
-    margin: 0, auto;
+    margin: 1rem, auto;
 }
 
 h1, h2, h3, p {
     padding: 0.5rem 1rem;
-    margin: 0.5rem 0;
+    margin: 0.5rem 05rem;
 }
 
 h1, h2, h3 {
@@ -60,7 +61,7 @@ footer {
 
 ul {
     list-style: none;
-    padding: 0.5rem 1rem;
+    padding: 0;
 }
 
 ul li a {
@@ -78,4 +79,29 @@ ul li:hover {
 
 .genre_filter .current {
     background-color: aliceblue;
+}
+
+.paginator {
+    margin: 1rem
+}
+
+.paginator a, .paginator span{
+    display: inline-block;
+    padding: 0.3rem;
+    margin: 0.2rem;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+
+}
+.paginator span {
+    background-color: aqua;
+    color: black;
+}
+
+.paginator a {
+    background-color: bisque;
+}
+
+.paginator form{
+    display: inline-block;
 }

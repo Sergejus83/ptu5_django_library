@@ -38,7 +38,7 @@ def author(request, author_id):
 
 class BookListView(ListView):
     model = Book
-    paginate_by = 1
+    paginate_by = 2
     template_name = 'library/book_list.html'
 
     def get_queryset(self):

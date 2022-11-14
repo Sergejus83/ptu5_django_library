@@ -1,4 +1,5 @@
 {% extends 'library/base.html' %}
+{% load static %}
 {% block title %}Book in {{ block.super }}{% endblock title %}
 {% block content %}
     <h1>Book {{ book_count }} pcs
@@ -18,7 +19,6 @@
                 <input type="text" name="search" value="{{ request.GET.search }}">
                 <button type="submit">search</button>
             </form>
-    </div>   
     </div>
     <div class="genre_filter">
         <h3>Availible Genres</h3>
@@ -28,12 +28,21 @@
             {% endfor %}
         </ul>
     </div>
-    <ul>
+    <ul class="book_list">
         {% for book in book_list %}
-            <li><a href="{% url 'book' book.pk %}">{{ book.title }}</a> - {{ book.author.link }}</li>   
+            <li class="book">
+                <a href="{% url 'book' book.pk %}">
+                    {% if book.cover %}
+                        <img src="{{ book.cover.url }}">
+                    {% else %}
+                        <img src="{% static 'library/img/book2.jpeg' %}">
+                    {% endif %}
+                    <h3>{{ book.title }}</h3>
+                </a>
+                <p>by {{ book.author.link }}</p>
+            </li>   
         {% endfor %}
     </ul>
-
 {% endblock content %}
 
 

@@ -14,7 +14,21 @@ header, main, footer {
 
 header {
     background-color: rgb(91, 96, 99);
-    margin: 1rem, auto;
+}
+
+header .container {
+    display: flex;
+    flex-direction: row;
+}
+
+.spacer {
+    flex-grow: 1;
+}
+
+header .container span {
+    align-self: center;
+    color: #ccc;
+    padding: 0.5rem;
 }
 
 header a {
@@ -33,7 +47,7 @@ main {
 }
 
 .container {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
     max-width: 1200px;
     min-width: 480px;
     margin: 1rem, auto;
@@ -131,3 +145,9 @@ ul.book_list li.book h3 {
 table {
     margin: 0.5rem 1rem;
 }
+
+.form-error {
+    border: 3pt solid rgb(255, 0, 0);
+    background-color: rgb(246, 242, 7);
+}
+

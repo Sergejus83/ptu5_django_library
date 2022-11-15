@@ -11,24 +11,32 @@
 <body>
     <header>
         {% comment %} Meniukas {% endcomment %}
-        <div class "container">
+        <div class="container">
             {% block nav %}
                 <a href="{% url 'index' %}">Home</a>
                 <a href="{% url 'authors' %}">Authors</a>
                 <a href="{% url 'books' %}">Book</a>
-                <a href="{% url 'admin:index' %}">Admin</a>
-
-                {% endblock nav %}
+                <span class="spacer"></span>
+                {% if user.is_authenticated %}
+                    <span>{{ user }}</span>
+                    {% if user.is_superuser or user.is_staff %}
+                    <a href="{% url 'admin:index' %}">Admin</a>
+                    {% endif %}
+                    <a href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}{% if not 'accounts/' in request.path %}?next={{ request.path }}{% endif %}">Login</a>
+                {% endif %}
+            {% endblock nav %}
         </div>
     </header>
     <main>
-        <div class "container">
+        <div class="container">
             {% block content %}
             {% endblock  %}
         </div>
     </main>
     <footer>
-        <div class "container">
+        <div class="container">
             {% block footer %}<p>(c) 2022 PTU5 </p>{% endblock footer %}
         </div>
     </footer>

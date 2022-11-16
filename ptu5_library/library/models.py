@@ -4,6 +4,7 @@ import uuid
 from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.timezone import datetime
+from tinymce.models import HTMLField
 
 # Create your models here.
 class Genre(models.Model):
@@ -41,7 +42,7 @@ class Author(models.Model):
 
 class Book(models.Model):
     title = models.CharField('title', max_length = 255) # string
-    summery = models.TextField('summery') # didelis koda, sunku filtruoti ir ieskoti per tekst
+    summery = HTMLField('summery') # didelis koda, sunku filtruoti ir ieskoti per tekst
     isbn = models.CharField('ISBN', max_length=12, null=True, blank=True, help_text='<a href="https://www.isbn-international.org/content/what-isbn" target="_blank"> ISBN code</a>consisting of 13 symbols') # knygu kodas
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, 
     null=True, blank=True,

@@ -15,16 +15,16 @@ class BookAdmin(admin.ModelAdmin):
 
 
 class BookInstanceAdmin(admin.ModelAdmin):
-    list_display = ('unique_id', 'book', 'status', 'due_back')
+    list_display = ('unique_id', 'book', 'status', 'due_back', 'reader') # , 'is_overdue'
     # sukuriam filtrus
     list_filter = ('status', 'due_back')
-    readonly_fields = ('unique_id', )
-    search_fields = ('unique_id', 'book__title', 'book__author__last_name',) # django lookup     +   __exact
-    list_editable = ('status', 'due_back')
+    readonly_fields = ('unique_id', 'is_overdue')
+    search_fields = ('unique_id', 'book__title', 'book__author__last_name__exact', 'reader__last_name') # django lookup     +   __exact
+    list_editable = ('status', 'due_back', 'reader')
 
     fieldsets = (
     ('General', {'fields': ('unique_id', 'book')}),
-    ('Availability', {'fields': (('status', 'due_back'),)}),
+    ('Availability', {'fields': (('status', 'due_back', 'is_overdue'), 'reader')}),
     ) # 'due_back'),) - sita kablelis ledzia isdelioti eilutes tvarka
 
 

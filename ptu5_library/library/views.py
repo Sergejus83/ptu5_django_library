@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DeleteView, DetailView
-from django.http import HttpResponse
-from . models import Genre, Author, Book, BookInstance
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView, DeleteView, DetailView
+from . models import Genre, Author, Book, BookInstance
 
 # Create your views here.
 
@@ -68,3 +69,14 @@ class BookListView(ListView):
 class BookDetailView(DetailView):
     model = Book
     template_name = 'library/book_detail.html'
+
+
+class UserBookListView(LoginRequiredMixin, ListView):
+    model = BookInstance
+    template_name = 'library/user_book_list.html'
+    paginate_by = 3
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(reader=self.request.user).order_by('due_back')
+        return queryset

@@ -214,3 +214,13 @@ table {
     color: rgb(18, 73, 9);
     border-color: rgb(3, 66, 3);
 }
+
+.float-right {
+    float: right;
+}
+
+.book-review h4 {
+    display: block;
+    padding: 0.5rem 1rem;
+    margin: 0;
+}

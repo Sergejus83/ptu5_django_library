@@ -16,4 +16,14 @@
     <div class="summary">
         {{ object.summery|safe }}
     </div>
+    <h2>Review:</h2>
+    {% if book.reviews %}
+        {% for review in book.reviews.all %}
+        <div class="fbook-review">
+            <p>{{ review.reader }}
+                <span class="float-right">{{ review.create_at}}</span>
+            <p>{{ review.content }}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
 {% endblock content %}

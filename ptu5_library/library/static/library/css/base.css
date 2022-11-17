@@ -156,6 +156,21 @@ table {
     padding: 0.5rem;
 }
 
+.form-grid {
+    grid-template-columns: 10rem auto;
+}
+
+.form-grid div {
+    display: inline-block;
+    padding: 0.5rem;
+    align-self: center;
+    justify-self: stretch;
+}
+
+.form-grid input {
+    width: 90%;
+}
+
 .my-books-table {
     grid-template-columns: 3fr 1fr 1fr;
 }
@@ -181,4 +196,21 @@ table {
     background-color: #f99;
     color: red;
     font-weight: bold;
+}
+
+.alert {
+    padding: 0.5rem 1rem;
+    border:  3px solid #999;
+}
+
+.alert-error {
+    background-color: rgb(225, 230, 76);
+    color: red;
+    border-color: red;
+}
+
+.alert-success {
+    background-color: rgb(173, 241, 166);
+    color: rgb(18, 73, 9);
+    border-color: rgb(3, 66, 3);
 }

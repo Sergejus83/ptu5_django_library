@@ -224,3 +224,12 @@ table {
     padding: 0.5rem 1rem;
     margin: 0;
 }
+
+.review-form label {
+    display: none;
+}
+
+.review-form {
+    background-color: rgba(173, 122, 92, 0.3);
+    border-bottom: 3px solid red;
+}

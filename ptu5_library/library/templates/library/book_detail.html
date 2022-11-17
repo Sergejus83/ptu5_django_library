@@ -16,13 +16,23 @@
     <div class="summary">
         {{ object.summery|safe }}
     </div>
-    <h2>Review:</h2>
+    <h2>Reviews:</h2>
+    {% if user.is_authenticated %}
+        <div class="review-form">
+            <p>If you read this book, please leave a review:</p>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <p><button type="submit">Post review</button></p>
+            </from>
+        </div>
+    {% endif %}
     {% if book.reviews %}
         {% for review in book.reviews.all %}
-        <div class="fbook-review">
-            <p>{{ review.reader }}
-                <span class="float-right">{{ review.create_at}}</span>
-            <p>{{ review.content }}</p>
+            <div class="book-review">
+                <h4>{{ review.reader }}
+                    <span class="float-right">{{ review.create_at}}</span></h4>
+                <p>{{ review.content }}</p>
             </div>
         {% endfor %}
     {% endif %}

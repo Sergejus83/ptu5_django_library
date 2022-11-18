@@ -233,3 +233,13 @@ table {
     background-color: rgba(173, 122, 92, 0.3);
     border-bottom: 3px solid red;
 }
+
+.user-profile-photo {
+    max-width: 20rem;
+    border-radius: 5rem;
+}
+
+.flex-profile {
+    display: flex;
+    /* place-items: ; */
+}

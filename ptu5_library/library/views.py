@@ -24,7 +24,7 @@ def index(request):
     context = {
         'book_count': book_count,
         'book_intance_count': book_intance_count,
-        'book_intance_availible_count': book_instance_availible_count,
+        'book_instance_availible_count': book_instance_availible_count,
         'author_count': author_count,
         'genre_count': genre_count,
         'visits_count': visits_count,

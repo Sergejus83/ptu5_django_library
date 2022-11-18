@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.core.validators import validate_email
@@ -20,7 +21,7 @@ def register(request):
             error = True
 
         if not email or User.objects.filter(email=email).first():
-            messages.error(request, 'Email not entered or this ameail already exists')
+            messages.error(request, 'Email not entered or this email already exists')
             error = True
         else:
             try:
@@ -39,3 +40,6 @@ def register(request):
 
     return render(request, 'user_profile/register.html')
 
+@login_required
+def profile(request):
+    return render(request, 'user_profile/profile.html')

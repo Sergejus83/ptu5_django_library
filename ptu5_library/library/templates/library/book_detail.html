@@ -30,8 +30,11 @@
     {% if book.reviews %}
         {% for review in book.reviews.all %}
             <div class="book-review">
-                <h4>{{ review.reader }}
-                    <span class="float-right">{{ review.create_at}}</span></h4>
+                <h4>{% if review.reader.profile.photo %}
+                    <img src="{{ review.reader.profile.photo.url }}">
+                    {% endif %}
+                    {{ review.reader }}
+                    <span class="float-right">{{ review.create_at }}</span></h4>
                 <p>{{ review.content }}</p>
             </div>
         {% endfor %}

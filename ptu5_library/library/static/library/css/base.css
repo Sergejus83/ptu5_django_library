@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(245, 175, 118);
+    background-color: rgb(107, 169, 186);
     margin: 1rem;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: flex;
@@ -167,7 +167,9 @@ table {
     justify-self: stretch;
 }
 
-.form-grid input {
+.form-grid input[type="text"], 
+.form-grid input[type="email"], 
+.form-grid input[type="password"] {
     width: 90%;
 }
 
@@ -241,5 +243,18 @@ table {
 
 .flex-profile {
     display: flex;
-    /* place-items: ; */
+    place-items: stretch stretch;
+}
+
+.button {
+    background-color: #ccc;
+    color: #000;
+    text-decoration: none;
+    border: 1px solid #999;
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+}
+
+.button:hover {
+    background-color: #ddd;
 }

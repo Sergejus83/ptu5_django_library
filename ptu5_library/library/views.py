@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from . models import Genre, Author, Book, BookInstance
 from django.views.generic.edit import FormMixin
-from . forms import BookReviewForm
+from . forms import BookReviewForm, BookInstanceForm, BookInstanceUpdateForm
 from django.contrib import messages
 
 # Create your views here.
@@ -112,7 +112,8 @@ class UserBookListView(LoginRequiredMixin, ListView):
 
 class UserBookInstanceCreateView(LoginRequiredMixin, CreateView):
     model = BookInstance
-    fields = ('book', 'due_back',)
+    # fields = ('book', 'due_back',)
+    form_class = BookInstanceForm
     template_name = 'library/user_bookinstance_form.html'
     success_url = reverse_lazy('user_books')
 
@@ -123,9 +124,10 @@ class UserBookInstanceCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class UserBookInstanceUpdateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+class UserBookInstanceUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = BookInstance
-    fields = ('book', 'due_back',)
+    # fields = ('book', 'due_back',)
+    form_class = BookInstanceUpdateForm
     template_name = 'library/user_bookinstance_form.html'
     success_url = reverse_lazy('user_books')
 
@@ -137,11 +139,12 @@ class UserBookInstanceUpdateView(LoginRequiredMixin, UserPassesTestMixin, Create
 
     def test_func(self):
         book_instance = self.get_object()
-        return self.request.user == book_instance
+        return self.request.user == book_instance.reader
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.get_object().status == 't':
+        context['book_instance'] = self.get_object()
+        if context['book_instance'].status == 't':
             context['action'] = 'Extend'
         else:
             context['action'] = 'Take'

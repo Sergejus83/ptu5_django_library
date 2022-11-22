@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.timezone import datetime, timedelta
-from . models import BookReview
+from . models import BookReview, BookInstance
 
 class BookReviewForm(forms.ModelForm):
     def is_valid(self) -> bool:
@@ -24,3 +24,21 @@ class BookReviewForm(forms.ModelForm):
             'book': forms.HiddenInput(),
             'reader': forms.HiddenInput(),
         }
+
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+
+class BookInstanceForm(forms.ModelForm):
+    class Meta:
+        model = BookInstance
+        fields = ('book', 'due_back', )
+        widgets = {'due_back': DateInput()}
+
+
+class BookInstanceUpdateForm(forms.ModelForm):
+    class Meta:
+        model = BookInstance
+        fields = ('book', 'due_back', )
+        widgets = {'due_back': DateInput(), 'book': forms.HiddenInput()}

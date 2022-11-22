@@ -1,9 +1,9 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from . models import Genre, Author, Book, BookInstance
 from django.views.generic.edit import FormMixin
 from . forms import BookReviewForm
@@ -104,9 +104,64 @@ class BookDetailView(FormMixin, DetailView):
 class UserBookListView(LoginRequiredMixin, ListView):
     model = BookInstance
     template_name = 'library/user_book_list.html'
-    paginate_by = 3
 
     def get_queryset(self):
         queryset = super().get_queryset()
         queryset = queryset.filter(reader=self.request.user).order_by('due_back')
         return queryset
+
+class UserBookInstanceCreateView(LoginRequiredMixin, CreateView):
+    model = BookInstance
+    fields = ('book', 'due_back',)
+    template_name = 'library/user_bookinstance_form.html'
+    success_url = reverse_lazy('user_books')
+
+    def form_valid(self, form):
+        form.instance.reader = self.request.user
+        form.instance.status = 'r'
+        messages.success(self.request, 'book reserved')
+        return super().form_valid(form)
+
+
+class UserBookInstanceUpdateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model = BookInstance
+    fields = ('book', 'due_back',)
+    template_name = 'library/user_bookinstance_form.html'
+    success_url = reverse_lazy('user_books')
+
+    def form_valid(self, form):
+        form.instance.reader = self.request.user
+        form.instance.status = 't'
+        messages.success(self.request, 'book taken')
+        return super().form_valid(form)
+
+    def test_func(self):
+        book_instance = self.get_object()
+        return self.request.user == book_instance
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.get_object().status == 't':
+            context['action'] = 'Extend'
+        else:
+            context['action'] = 'Take'
+        return context
+
+
+class UserBookInstanceDeleteView(LoginRequiredMixin, UserPassesTestMixin,DeleteView):
+    model = BookInstance
+    template_name = 'library/user_bookinstance_delete.html'
+    success_url = reverse_lazy('user_books')
+
+    def test_func(self):
+        book_instance = self.get_object()
+        return self.request.user == book_instance.reader
+
+
+    def form_valid(self, form):
+        book_instance = self.get_object()
+        if book_instance.status == 't':
+            messages.success(self.request, 'book returned')
+        else:
+            messages.success(self.request, 'book reservation cancelled')
+        return super().form_valid(form)

@@ -5,7 +5,7 @@
 <h1>{% if object.status == 't' %}{% trans "Returning a book" %}{% else %}{% trans "Cancel book reservation" %}{% endif %}</h1>
 <form method="post" action="">
     {% csrf_token %}
-    <p>trans{% if object.status == 't' %}{% trans "return" %}{% else%}{% trans "cancel reservation for" %}{% endif %} {% trans "the book" %} {{ object.book.title }}?</p>
+    <p>{% if object.status == 't' %}{% trans "return" %}{% else%}{% trans "cancel reservation for" %}{% endif %} {% trans "the book" %} {{ object.book.title }}?</p>
     <p>
         <button type="submit" class="button">{% trans "YES" %}</button>
         <a href="{% url 'user_books' %}" class="button">{% trans "NO" %}</a>

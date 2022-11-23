@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-{% load static %}
-{% load i18n %}
-<html lang="en">
+{% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
+{% comment %} <html lang="en">
+<head> {% endcomment %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,6 +32,17 @@
                     <a href="{% url 'register' %}">{% trans "Register" %}</a>
                     <a href="{% url 'login' %}{% if not 'accounts/' in request.path %}?next={{ request.path }}{% endif %}">{% trans "Login" %}</a>
                 {% endif %}
+                <span>
+                    <form action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input action="text" type="hidden" value="{{ request.path }}">
+                        <select name="language" onchange="this.form.submit()">
+                            {% for lang in LANGUAGES %}
+                                <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %} selected{% endif %}>{{ lang.1}}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </span>
             {% endblock nav %}
         </div>
     </header>

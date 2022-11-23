@@ -1,27 +1,28 @@
 {% extends 'library/base.html' %}
+{% load i18n %}
 {% load static %}
-{% block title %}Book in {{ block.super }}{% endblock title %}
+{% block title %}{% translate "" %} {{ block.super }}{% endblock title %}
 {% block content %}
-    <h1>Book {{ book_count }} pcs
+    <h1>{% trans "Book in" %} {{ book_count }} {% trans "pcs" %}
         {% if genre %}{{ genre }}{% endif %}
     </h1>
     <div class="paginator">
             {% if page_obj.has_previous %}
-                <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page=1">&#11120; First | </a>
-                <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page={{ page_obj.previous_page_number }}">Back </a>
+                <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page=1">&#11120; {% trans "First" %} </a>
+                <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page={{ page_obj.previous_page_number }}">{% trans "Back" %}</a>
             {% endif %}
             {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
             {% if page_obj.has_next %}
-                <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page={{ page_obj.next_page_number }}">  Next | </a>
-                <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page={{ page_obj.paginator.num_pages }}">&#11122; Last </a>
+                <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page={{ page_obj.next_page_number }}"> {% trans " Next" %} </a>
+                <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page={{ page_obj.paginator.num_pages }}">&#11122; {% trans "Last" %} </a>
             {% endif %}
             <form action="{% url 'books' %}" method="get">
                 <input type="text" name="search" value="{{ request.GET.search }}">
-                <button type="submit">search</button>
+                <button type="submit">{% trans "search" %}</button>
             </form>
     </div>
     <div class="genre_filter">
-        <h3>Availible Genres</h3>
+        <h3>{% trans "Availible Genres" %}</h3>
         <ul>
             {% for filter_genre in genres %}
                 <li class="{% if filter_genre == genre %}current{% endif %}">{{ filter_genre.link_filtered_books }}</li>
@@ -39,7 +40,7 @@
                     {% endif %}
                     <h3>{{ book.title }}</h3>
                 </a>
-                <p>by {{ book.author.link }}</p>
+                <p>{% trans "by" %} {{ book.author.link }}</p>
             </li>   
         {% endfor %}
     </ul>

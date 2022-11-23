@@ -6,6 +6,6 @@
     {% if book_instance %}<p>{{  book_instance.book }}</p>{% endif %}
     {% csrf_token %}
     {{ form.as_p }}
-    <p><button tupe="submit">{% if action %}{{ action }}{% else %}Reserve{% endif %}</button></p>
+    <p><button type="submit">{% if action %}{{ action }}{% else %}Reserve{% endif %}</button></p>
 </form>
 {% endblock content %}

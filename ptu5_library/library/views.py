@@ -11,6 +11,11 @@ from django.contrib import messages
 
 # Create your views here.
 
+def about_us(request):
+    return render(request, 'library/tree.html')
+
+
+
 def index(request):
     # return HttpResponse("Sveiki atvyke!")
     book_count = Book.objects.count()

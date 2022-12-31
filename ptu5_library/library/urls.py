@@ -20,5 +20,7 @@ urlpatterns = [
         views.UserBookInstanceDeleteView.as_view(),
         name='user_bookinstance_delete'
     ),
+    path('tree/', views.about_us, name='tree'),
+
 
 ]

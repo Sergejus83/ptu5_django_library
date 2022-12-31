@@ -20,6 +20,7 @@
                 <a href="{% url 'index' %}">{% trans "Home" %}</a>
                 <a href="{% url 'authors' %}">{% trans "Authors" %}</a>
                 <a href="{% url 'books' %}">{% trans "Book" %}</a>
+                <a href="{% url 'tree' %}">{% trans "About us" %}</a>
                 <span class="spacer"></span>
                 {% if user.is_authenticated %}
                     <a href="{% url 'profile' %}">{{ user }}</a>
